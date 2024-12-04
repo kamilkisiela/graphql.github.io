@@ -6,16 +6,13 @@ import { Tabs } from 'nextra/components'
 
 # GraphQL Federation
 
-In today's world of distributed systems and microservices,
-organizations face the challenge of efficiently managing and scaling their APIs.
-As applications grow more complex, traditional monolithic approaches often fall short.
-This is where federation comes into play - an architectural pattern that has found particular resonance in the GraphQL ecosystem.
+As applications grow more complex, traditional monolithic approaches often fall short. At scale, monolithic architectures can become cumbersome, brittle, and increasingly hard to test and validate. This has led to a rise in the adoption of new patterns like distributed systems and microservices. In some ways, GraphQL Federation is like microservices for GraphQL – an architectural pattern that has found particular resonance in the GraphQL ecosystem.
 
 GraphQL Federation gained widespread adoption after [Apollo GraphQL introduced Apollo Federation in 2019](https://www.apollographql.com/blog/apollo-federation-f260cf525d21).
 Their implementation has become a reference point for the GraphQL community,
-helping establish federation as a standard architectural pattern in the GraphQL ecosystem.
+helping establish federation as a standard architectural pattern for building a distributed graph in the GraphQL ecosystem.
 
-The GraphQL ecosystem is moving towards standardization of federation patterns.
+With more companies and developers seeing the benefits of building a distributed graph with federation, the GraphQL ecosystem is now moving towards standardization of federation patterns.
 The GraphQL Foundation's [Composite Schema Working Group](https://github.com/graphql/composite-schemas-wg),
 which includes engineers from various organizations across the industry including
 Apollo GraphQL, ChilliCream, Graphile, Hasura, Netflix and The Guild,
@@ -25,7 +22,7 @@ while ensuring room for innovation and different implementations.
 
 ## What is federation?
 
-Federation is an approach to organizing and managing distributed systems.
+Architecturally, federation is an approach to organizing and managing distributed systems.
 At its core, federation allows autonomous components to work together while maintaining their independence.
 Think of it like a federal government system: individual states maintain their sovereignty
 while cooperating under a central authority for shared concerns.
@@ -52,10 +49,10 @@ Consider an e-commerce platform: You might have separate teams managing products
 
 - Define their own GraphQL schema
 - Deploy and scale their service independently
-- Contribute to a unified API without tight coupling
+- Contribute to a unified GraphQL API without tight coupling
 - Maintain ownership of their domain-specific logic
 
-The magic happens through a federated gateway that acts as the central coordinator, combining these separate schemas into a unified schema that clients can query.
+The magic happens through a federated gateway that acts as the central coordinator, composing these separate schemas into a unified schema that clients can query.
 
 ## How Federation Works in GraphQL
 
@@ -118,7 +115,7 @@ type Order {
 
 Let's break down schema composition in GraphQL federation with more detail and examples.
 Schema composition is the process where multiple subgraph schemas are combined into one unified schema.
-It's more complex than simply merging schemas together, because it needs to handle relationships, detect incompatibilities, and ensure types are properly connected across services.
+It's more complex than simply merging schemas together, though, because it needs to handle relationships, detect incompatibilities, and ensure types are properly connected across services and subgraphs.
 
 Based on the examples we provided before, here's the unified schema GraphQL clients will see and can query:
 
@@ -155,7 +152,7 @@ This unified schema combines types and fields from all three subgraphs (Users, O
 The federation gateway is the entry point to your distributed data graph.
 It presents a unified GraphQL endpoint to clients
 and handles the complexity of routing queries to the appropriate subgraphs and assembling the results,
-often provides caching and performance optimizations.
+and often provides caching and performance optimizations.
 
 ```mermaid
 graph TD
@@ -205,22 +202,22 @@ This autonomy accelerates development and reduces coordination overhead.
 
 The schema composition step verifies integration between services
 by ensuring that changes in individual subgraphs
-do not conflict with other subgraphs in the federation.
+do not conflict with other subgraphs.
 
 ### Scalability and Performance
 
-Services can be scaled independently based on their specific requirements.
+Subgraphs and services can be scaled independently based on their specific requirements.
 The product catalog might need different scaling characteristics than the order processing system.
 
 ### Single, Unified API
 
-Thanks to GraphQL gateway, clients get a single endpoint with unified schema.
+Thanks to GraphQL, clients get a single endpoint with unified schema spanning multiple subgraphs.
 The complexity of distributed systems is hidden.
 The gateway ensures every query reaches its destination and returns with the right data.
 
 ## Federation vs. Monolithic Architecture
 
-While monolithic GraphQL APIs have their place, federation offers several advantages for larger applications:
+While monolithic GraphQL APIs have their place, federated architectures offer several advantages for larger applications:
 
 | **Aspect**        | **Monolithic GraphQL**            | **Federated GraphQL**         |
 | ----------------- | --------------------------------- | ----------------------------- |
@@ -246,7 +243,7 @@ To implement GraphQL federation, organizations should:
 1. **Identify Service Boundaries**: Define clear boundaries between different domains in your application
 2. **Design Schemas**: Create schemas that reflect these boundaries while considering how they'll interact
 3. **Implement Subgraphs**: Build individual services that implement their portion of the schema
-4. **Set Up Gateway**: Deploy a federation gateway to compose and serve the unified schema
+4. **Set Up a federated Gateway**: Deploy a federation gateway to compose and serve the unified schema
 5. **Monitor and Optimize**: Implement monitoring and continuously optimize query performance
 
-Organizations can gradually migrate from a monolithic to federated GraphQL, one service at a time.
+Organizations can gradually migrate from a monolithic to federated GraphQL implementation, one service at a time.
